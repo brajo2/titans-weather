@@ -22,7 +22,7 @@ def load_venue_data(file_path: str) -> List[Venue]:
         venues.append(venue)
     return venues
 
-def load_game_data(file_path: str) -> List[Game]:
+def load_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
     """
     because venues host games, it'll make sense to load the venue data first
 
@@ -44,6 +44,6 @@ def load_game_data(file_path: str) -> List[Game]:
             home_team_final_score=row['Home_Team_Final_Score'],
             visit_team=row['Visit_Team'],
             visit_team_final_score=row['Visit_Team_Final_Score'],
-            venue=None
         )
+        game.venue = game.set_venue(venues)
         games.append(game)
