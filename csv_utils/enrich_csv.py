@@ -4,7 +4,7 @@ from shared.game_venue import Game, Venue
 
 import pandas as pd
 
-def load_venue_data(file_path: str) -> List[Venue]:
+def enrich_venue_data(file_path: str) -> List[Venue]:
     venues: List[Venue] = []
     try:
         data = pd.read_csv(file_path)
@@ -28,7 +28,7 @@ def load_venue_data(file_path: str) -> List[Venue]:
 
     return venues
 
-def load_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
+def enrich_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
     """
     because venues host games, it'll make sense to load the venue data first
 
@@ -53,6 +53,7 @@ def load_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
                 visit_team_final_score=row['visit_team_final_score'],
             )
             game.venue = game.set_venue(venues)
+            game.use_weather_variables = game.set_use_weather_variables()
             games.append(game)
     except Exception as e:
         print(f"Error loading game data: {e}")
