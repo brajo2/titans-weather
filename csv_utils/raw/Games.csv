@@ -1,4 +1,4 @@
-Season,Week,Game_Date,Start_Time,Start_Time_GMT_Offset,Game_Site,Home_Team,Home_Team_Final_Score,Visit_Team,Visit_Team_Final_Score
+season,week,game_date,start_time,start_time_gmt_offset,game_site,home_team,home_team_final_score,visit_team,visit_team_final_score
 2021,1,9/9/2021,20:20,-5,Tampa Bay,Tampa Bay Buccaneers,31,Dallas Cowboys,29
 2021,1,9/12/2021,13:00,-5,Atlanta,Atlanta Falcons,6,Philadelphia Eagles,32
 2021,1,9/12/2021,13:00,-5,Orchard Park,Buffalo Bills,16,Pittsburgh Steelers,23

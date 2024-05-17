@@ -6,20 +6,26 @@ import pandas as pd
 
 def load_venue_data(file_path: str) -> List[Venue]:
     venues: List[Venue] = []
-    data = pd.read_csv(file_path)
+    try:
+        data = pd.read_csv(file_path)
 
-    for index, row in data.iterrows():
-        venue = Venue(
-            name=row['Name'],
-            capacity=row['Capacity'],
-            location=row['Location'],
-            surface=row['Surface'],
-            roof_type=row['Roof_Type'],
-            teams=row['Teams'],
-            opened=row['Opened'],
-            geo=(row['Latitude'], row['Longitude'])
-        )
-        venues.append(venue)
+        for index, row in data.iterrows():
+            venue = Venue(
+                name=row['name'],
+                capacity=row['capacity'],
+                location=row['location'],
+                surface=row['surface'],
+                roof_type=row['roof_type'],
+                teams=row['teams'],
+                opened=row['opened'],
+                geo=row['geo'],
+                id=index,
+            )
+            venues.append(venue)
+    except Exception as e:
+        print(f"Error loading venue data: {e}")
+        raise e
+
     return venues
 
 def load_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
@@ -30,20 +36,26 @@ def load_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
     :return:
     """
     games: List[Game] = []
-    data = pd.read_csv(file_path)
+    try:
+        data = pd.read_csv(file_path)
 
-    for index, row in data.iterrows():
-        game = Game(
-            season=row['Season'],
-            week=row['Week'],
-            game_date=row['Game_Date'],
-            start_time=row['Start_Time'],
-            start_time_gmt_offset=row['Start_Time_GMT_Offset'],
-            game_site=row['Game_Site'],
-            home_team=row['Home_Team'],
-            home_team_final_score=row['Home_Team_Final_Score'],
-            visit_team=row['Visit_Team'],
-            visit_team_final_score=row['Visit_Team_Final_Score'],
-        )
-        game.venue = game.set_venue(venues)
-        games.append(game)
+        for index, row in data.iterrows():
+            game = Game(
+                season=row['season'],
+                week=row['week'],
+                game_date=row['game_date'],
+                start_time=row['start_time'],
+                start_time_gmt_offset=row['start_time_gmt_offset'],
+                game_site=row['game_site'],
+                home_team=row['home_team'],
+                home_team_final_score=row['home_team_final_score'],
+                visit_team=row['visit_team'],
+                visit_team_final_score=row['visit_team_final_score'],
+            )
+            game.venue = game.set_venue(venues)
+            games.append(game)
+    except Exception as e:
+        print(f"Error loading game data: {e}")
+        raise e
+
+    return games
