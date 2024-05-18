@@ -24,6 +24,7 @@ File for commonly used constant variables for querying the open meteo API:
     - apparent_temperature (it could feel worse based on humidity)
     - temperature
 """
+from shared.daily_param import DailyWeatherParam
 from shared.hourly_param import HourlyWeatherParam
 
 BASE_HOURLY_PARAMS = [
@@ -40,3 +41,74 @@ BASE_HOURLY_PARAMS = [
     HourlyWeatherParam.SOIL_MOISTURE_0_TO_7CM,
     HourlyWeatherParam.SNOW_DEPTH
 ]
+
+"""
+But for variables that are potentially affected by the venue:
+"""
+SURFACE_VARIABLES = [
+    # hourly
+    HourlyWeatherParam.SOIL_TEMPERATURE_0_TO_7CM,
+    HourlyWeatherParam.SOIL_TEMPERATURE_7_TO_28CM,
+    HourlyWeatherParam.SOIL_TEMPERATURE_28_TO_100CM,
+    HourlyWeatherParam.SOIL_TEMPERATURE_100_TO_255CM,
+    HourlyWeatherParam.SOIL_MOISTURE_0_TO_7CM,
+    HourlyWeatherParam.SOIL_MOISTURE_7_TO_28CM,
+    HourlyWeatherParam.SOIL_MOISTURE_28_TO_100CM,
+    HourlyWeatherParam.SOIL_MOISTURE_100_TO_255CM,
+    HourlyWeatherParam.SNOW_DEPTH,
+    HourlyWeatherParam.ET0_FAO_EVAPOTRANSPIRATION,
+    HourlyWeatherParam.PRECIPITATION,
+    HourlyWeatherParam.RAIN,
+    HourlyWeatherParam.SNOWFALL,
+    # daily
+    DailyWeatherParam.PRECIPITATION_SUM,
+    DailyWeatherParam.RAIN_SUM,
+    DailyWeatherParam.SNOWFALL_SUM,
+    DailyWeatherParam.ET0_FAO_EVAPOTRANSPIRATION,
+    DailyWeatherParam.PRECIPITATION_HOURS
+]
+
+ROOF_VARIABLES = [
+    # hourly
+    HourlyWeatherParam.TEMPERATURE_2M,
+    HourlyWeatherParam.RELATIVE_HUMIDITY_2M,
+    HourlyWeatherParam.DEW_POINT_2M,
+    HourlyWeatherParam.APPARENT_TEMPERATURE,
+    HourlyWeatherParam.PRESSURE_MSL,
+    HourlyWeatherParam.SURFACE_PRESSURE,
+    HourlyWeatherParam.CLOUD_COVER,
+    HourlyWeatherParam.CLOUD_COVER_LOW,
+    HourlyWeatherParam.CLOUD_COVER_MID,
+    HourlyWeatherParam.CLOUD_COVER_HIGH,
+    HourlyWeatherParam.SHORTWAVE_RADIATION,
+    HourlyWeatherParam.DIRECT_NORMAL_IRRADIANCE,
+    HourlyWeatherParam.DIFFUSE_RADIATION,
+    HourlyWeatherParam.GLOBAL_TILTED_IRRADIANCE,
+    HourlyWeatherParam.SUNSHINE_DURATION,
+    HourlyWeatherParam.WIND_SPEED_10M,
+    HourlyWeatherParam.WIND_SPEED_100M,
+    HourlyWeatherParam.WIND_DIRECTION_10M,
+    HourlyWeatherParam.WIND_DIRECTION_100M,
+    HourlyWeatherParam.WIND_GUSTS_10M,
+    HourlyWeatherParam.VAPOUR_PRESSURE_DEFICIT,
+    HourlyWeatherParam.WEATHER_CODE,
+    # daily
+    DailyWeatherParam.WEATHER_CODE,
+    DailyWeatherParam.TEMPERATURE_2M_MAX,
+    DailyWeatherParam.TEMPERATURE_2M_MIN,
+    DailyWeatherParam.APPARENT_TEMPERATURE_MAX,
+    DailyWeatherParam.APPARENT_TEMPERATURE_MIN,
+    DailyWeatherParam.SUNRISE,
+    DailyWeatherParam.SUNSET,
+    DailyWeatherParam.SUNSHINE_DURATION,
+    DailyWeatherParam.DAYLIGHT_DURATION,
+    DailyWeatherParam.WIND_SPEED_10M_MAX,
+    DailyWeatherParam.WIND_GUSTS_10M_MAX,
+    DailyWeatherParam.WIND_DIRECTION_10M_DOMINANT,
+    DailyWeatherParam.SHORTWAVE_RADIATION_SUM
+]
+
+
+## misc
+GAME_LENGTH = 3  # hours
+PRE_GAME_WINDOW = 2  # hours
