@@ -1,6 +1,6 @@
 # loading game data from csv_utils
 from typing import List
-from shared.game_venue import Game, Venue
+from shared.game_venue import Game, Venue, NoMatchingVenueError
 
 import pandas as pd
 
@@ -52,8 +52,12 @@ def enrich_game_data(file_path: str, venues: List[Venue]) -> List[Game]:
                 visit_team=row['visit_team'],
                 visit_team_final_score=row['visit_team_final_score'],
             )
-            game.venue = game.set_venue(venues)
-            game.use_weather_variables = game.set_use_weather_variables()
+            try:
+                game.set_venue(venues)
+            except NoMatchingVenueError as e:
+                print(f"Error setting venue for game {game}: {e}, skipping game")
+                game.venue = None
+            game.set_use_weather_variables(venues)
             games.append(game)
     except Exception as e:
         print(f"Error loading game data: {e}")
