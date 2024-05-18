@@ -16,3 +16,12 @@ class WindSpeedUnit(Enum):
     MILES_PER_HOUR = "mph"
     METERS_PER_SECOND = "ms"
     KNOTS = "knots"
+
+class Timezone(Enum):  # could be expanded for the api's options:
+    AUTO = "auto"
+
+######
+"""
+API other options:
+
+"""
