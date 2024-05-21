@@ -1,6 +1,8 @@
 from collections import namedtuple
 from typing import List, Tuple
 
+import numpy as np
+
 from api.geocoding import get_geolocations
 from shared.constants import SURFACE_VARIABLES, ROOF_VARIABLES
 from shared.date_util import convert_date_format
@@ -208,6 +210,15 @@ class Game:
         """
         self.weather['hourly'] = self.weather['hourly'][start_hour - pre_game_window: start_hour + game_length + 1]
 
+    def check_if_game_finished(self):
+        """
+        There was one game that did not finish because of the Bills player injury.
+        :return:
+        """
+        return self.home_team_final_score is not None and \
+            np.isfinite(self.home_team_final_score) and \
+            self.visit_team_final_score is not None and \
+            np.isfinite(self.visit_team_final_score)
     ##################
     # todo - deprecate, cool idea but no need to run it in favor of just a map that adjusts for certain game_site names
     # being different from venue cities
