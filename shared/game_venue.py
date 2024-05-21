@@ -4,8 +4,10 @@ from typing import List, Tuple
 import numpy as np
 
 from api.geocoding import get_geolocations
-from shared.constants import SURFACE_VARIABLES, ROOF_VARIABLES
+from shared.constants import PRECIPITATION_VARIABLES, NON_PRECIPITATION_VARIABLES
 from shared.date_util import convert_date_format
+
+CLOSED_STADIUM_ROOF_IDENTIFIERS_LOWERCASE = ['fixed', 'retractable']
 
 """
 Venues are where games are played
@@ -98,19 +100,17 @@ class Venue:
     def set_should_use_weather_data(self):  # todo - get "business" rules update
         # only would know if the venue is set though
         """
-        could use refinement on this logic
-        If the venue is closed, we *may* not need to use weather data
-        If the venue is turf, we *may* not need to use the weather data for the surface variables
+        could use refinement on this logic !!! -- rough example chosen here
+
+        -- we really need to know whether it's raining or snowing & then a retractable roof would be closed
+
+        If the venue is closed or retractable, we *may* not need to use weather data
+        otherwise, we just use it
         :return:
         """
-        weather_usage = {x: True for x in [*SURFACE_VARIABLES, *ROOF_VARIABLES]}
-        if self.roof_type.lower() == 'closed':
-            weather_usage = {x: False for x in [*SURFACE_VARIABLES, *ROOF_VARIABLES]}
-        if 'turf' in self.surface.lower():  # string comparison here is a bit tricky / could be improved
-            for key in SURFACE_VARIABLES:
-                weather_usage[key] = False
-
-        return weather_usage
+        if self.roof_type.lower() in CLOSED_STADIUM_ROOF_IDENTIFIERS_LOWERCASE:
+            return {x: False for x in [*PRECIPITATION_VARIABLES, *NON_PRECIPITATION_VARIABLES]}
+        return {x: True for x in [*PRECIPITATION_VARIABLES, *NON_PRECIPITATION_VARIABLES]}
 
 
 """
@@ -190,10 +190,10 @@ class Game:
         else:
             try:
                 self.set_venue(venues=venues)
-                self.set_use_weather_variables()
+                self.set_use_weather_variables(venues=venues)
             except NoMatchingVenueError as e:
                 print(f"Error setting venue for game {self}: {e}, can't set variables for game")
-                self.use_weather_variables = {x: False for x in [*SURFACE_VARIABLES, *ROOF_VARIABLES]}  # if we can't find a venue, we can't use weather data
+                self.use_weather_variables = {x: False for x in [*PRECIPITATION_VARIABLES, *NON_PRECIPITATION_VARIABLES]}  # if we can't find a venue, we can't use weather data
 
     def narrow_weather_hour_window(self,
                                    start_hour: int,

@@ -45,7 +45,7 @@ BASE_HOURLY_PARAMS = [
 """
 But for variables that are potentially affected by the venue:
 """
-SURFACE_VARIABLES = [
+PRECIPITATION_VARIABLES = [
     # hourly
     HourlyWeatherParam.SOIL_TEMPERATURE_0_TO_7CM,
     HourlyWeatherParam.SOIL_TEMPERATURE_7_TO_28CM,
@@ -68,7 +68,7 @@ SURFACE_VARIABLES = [
     DailyWeatherParam.PRECIPITATION_HOURS
 ]
 
-ROOF_VARIABLES = [
+NON_PRECIPITATION_VARIABLES = [
     # hourly
     HourlyWeatherParam.TEMPERATURE_2M,
     HourlyWeatherParam.RELATIVE_HUMIDITY_2M,
