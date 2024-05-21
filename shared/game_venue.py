@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from api_utils.geocoding import get_geolocations
 from shared.constants import SURFACE_VARIABLES, ROOF_VARIABLES
-from shared.util import convert_date_format
+from shared.date_util import convert_date_format
 
 """
 Venues are where games are played
