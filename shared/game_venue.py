@@ -1,7 +1,7 @@
 from collections import namedtuple
 from typing import List, Tuple
 
-from api_utils.geocoding import get_geolocations
+from api.geocoding import get_geolocations
 from shared.constants import SURFACE_VARIABLES, ROOF_VARIABLES
 from shared.date_util import convert_date_format
 
