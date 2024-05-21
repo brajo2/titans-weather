@@ -7,7 +7,7 @@ from tenacity import retry, stop_after_attempt, wait_fixed
 
 from shared.daily_param import DailyWeatherParam
 from shared.hourly_param import HourlyWeatherParam
-from shared.weather_enum import WeatherLookupWindow, TemperatureUnit, WindSpeedUnit
+from shared.weather_enum import WeatherLookupWindow, TemperatureUnit, WindSpeedUnit, Timezone
 
 
 # Add @retry from tenacity to retry the function call no more than 5 times
@@ -15,6 +15,7 @@ from shared.weather_enum import WeatherLookupWindow, TemperatureUnit, WindSpeedU
 def get_historical_weather(latitude, longitude, start_date, end_date,
                            api_key=None,
                            window=WeatherLookupWindow.HOURLY,
+                           timezone=Timezone.AUTO,
                            temperature_unit=TemperatureUnit.FAHRENHEIT,
                            wind_speed_unit=WindSpeedUnit.KILOMETERS_PER_HOUR,
                            variables: list[HourlyWeatherParam | DailyWeatherParam] = []):
@@ -33,7 +34,7 @@ def get_historical_weather(latitude, longitude, start_date, end_date,
     :return: dict
     """
     variable_names_unpacked = [v.value.param_name for v in variables]
-    url = f"https://archive-api.open-meteo.com/v1/archive?latitude={latitude}&longitude={longitude}&start_date={start_date}&end_date={end_date}&{window.value}={','.join(variable_names_unpacked)}&temperature_unit={temperature_unit.value}&wind_speed_unit={wind_speed_unit.value}"
+    url = f"https://archive-api.open-meteo.com/v1/archive?latitude={latitude}&longitude={longitude}&start_date={start_date}&end_date={end_date}&{window.value}={','.join(variable_names_unpacked)}&temperature_unit={temperature_unit.value}&wind_speed_unit={wind_speed_unit.value}&timezone={timezone.value}"
 
     # set headers, not implemented
     headers = {}
@@ -42,33 +43,38 @@ def get_historical_weather(latitude, longitude, start_date, end_date,
     response = requests.get(url, headers=headers)
 
     # Check if the request was successful
-    if response.status_code == 200:
-        if window == WeatherLookupWindow.HOURLY:
-            resp = parse_hourly_response(response.json(), variable_names_unpacked)
-        elif window == WeatherLookupWindow.DAILY:
-            resp = parse_daily_response(response.json(), variable_names_unpacked)
-        return resp
-    else:
+    if response.status_code != 200:
         # Raise an exception if the request failed
         response.raise_for_status()
 
+    if window == WeatherLookupWindow.HOURLY:
+        resp = parse_hourly_weather_response(response.json(), variable_names_unpacked)
+    elif window == WeatherLookupWindow.DAILY:
+        resp = parse_daily_weather_response(response.json(), variable_names_unpacked)
+    return resp
 
-def parse_hourly_response(response: dict, variables: List[str]) -> dict:
+
+def parse_hourly_weather_response(response: dict, variables: List[str]) -> dict:
     """
         Clearly "hourly" is a set of synchronous arrays, where each index corresponds to the same time.
         Therefore, we can zip the arrays together to get a list of dictionaries,
         where each dictionary is a set of key-value pairs for each time.
     """
     metric_keys = variables
-    all_fields = ['time', *metric_keys]
+    all_fields = ['hour_index', 'time', *metric_keys]
     HourlyTuple = namedtuple('HourlyTuple', all_fields)
 
     num_records = len(response['hourly']['time'])
     hourly_records = []
     for i in range(num_records):
-        values = [response['hourly'][field][i] for field in all_fields]
+        hour_rec = []
+        for field in all_fields:
+            if field == 'hour_index':
+                hour_rec.append(i)
+            else:
+                hour_rec.append(response['hourly'][field][i])
         # Create a named tuple for this record and add it to the list
-        hourly_records.append(HourlyTuple(*values))
+        hourly_records.append(HourlyTuple(*hour_rec))
 
     data = {
         'latitude': response['latitude'],
@@ -83,7 +89,8 @@ def parse_hourly_response(response: dict, variables: List[str]) -> dict:
     return data
 
 
-def parse_daily_response(response: dict, variables: List[str]) -> dict:
+####### not really using right now
+def parse_daily_weather_response(response: dict, variables: List[str]) -> dict:
     """
         Clearly "daily" is a set of synchronous arrays, where each index corresponds to the same time.
         Therefore, we can zip the arrays together to get a list of dictionaries,
