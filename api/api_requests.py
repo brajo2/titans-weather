@@ -7,18 +7,19 @@ from tenacity import retry, stop_after_attempt, wait_fixed
 
 from shared.daily_param import DailyWeatherParam
 from shared.hourly_param import HourlyWeatherParam
-from shared.weather_enum import WeatherLookupWindow, TemperatureUnit, WindSpeedUnit, Timezone
+from shared.weather_enum import WeatherLookupWindow, TemperatureUnit, WindSpeedUnit, Timezone, Forecast
 
 
 # Add @retry from tenacity to retry the function call no more than 5 times
 @retry(stop=stop_after_attempt(5), wait=wait_fixed(2))
-def get_historical_weather(latitude, longitude, start_date, end_date,
-                           api_key=None,
-                           window=WeatherLookupWindow.HOURLY,
-                           timezone=Timezone.AUTO,
-                           temperature_unit=TemperatureUnit.FAHRENHEIT,
-                           wind_speed_unit=WindSpeedUnit.KILOMETERS_PER_HOUR,
-                           variables: list[HourlyWeatherParam | DailyWeatherParam] = []):
+def get_weather(latitude, longitude, start_date, end_date,
+                forecast_type=Forecast.ARCHIVE,
+                api_key=None,
+                window=WeatherLookupWindow.HOURLY,
+                timezone=Timezone.AUTO,
+                temperature_unit=TemperatureUnit.FAHRENHEIT,
+                wind_speed_unit=WindSpeedUnit.KILOMETERS_PER_HOUR,
+                variables: list[HourlyWeatherParam | DailyWeatherParam] = []):
     """
     example usage:
         - https://archive-api.open-meteo.com/v1/archive?latitude=52.52&longitude=13.41&start_date=2024-04-27&end_date=2024-04-27&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,wind_speed_100m&temperature_unit=fahrenheit&timeformat=unixtime
@@ -34,7 +35,7 @@ def get_historical_weather(latitude, longitude, start_date, end_date,
     :return: dict
     """
     variable_names_unpacked = [v.value.param_name for v in variables]
-    url = f"https://archive-api.open-meteo.com/v1/archive?latitude={latitude}&longitude={longitude}&start_date={start_date}&end_date={end_date}&{window.value}={','.join(variable_names_unpacked)}&temperature_unit={temperature_unit.value}&wind_speed_unit={wind_speed_unit.value}&timezone={timezone.value}"
+    url = f"https://archive-api.open-meteo.com/v1/{forecast_type}?latitude={latitude}&longitude={longitude}&start_date={start_date}&end_date={end_date}&{window.value}={','.join(variable_names_unpacked)}&temperature_unit={temperature_unit.value}&wind_speed_unit={wind_speed_unit.value}&timezone={timezone.value}"
 
     # set headers, not implemented
     headers = {}

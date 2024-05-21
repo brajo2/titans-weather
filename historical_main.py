@@ -2,7 +2,7 @@ from typing import List
 
 from tqdm import tqdm
 
-from api.historical_request import get_weather
+from api.api_requests import get_weather
 from historical.historical_pipeline import enrich_venue_data, enrich_game_data, multithread_process_games, \
     create_historical_table, insert_into_historical_table, enrich_game_weather
 from shared.constants import BASE_HOURLY_PARAMS, GAME_LENGTH, PRE_GAME_WINDOW

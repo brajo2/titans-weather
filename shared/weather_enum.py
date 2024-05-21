@@ -20,8 +20,6 @@ class WindSpeedUnit(Enum):
 class Timezone(Enum):  # could be expanded for the api's options:
     AUTO = "auto"
 
-######
-"""
-API other options:
-
-"""
+class Forecast(Enum):
+    ARCHIVE = "archive"
+    FORECAST = "forecast"

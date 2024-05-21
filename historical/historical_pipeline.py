@@ -9,7 +9,7 @@ import pandas as pd
 from sqlalchemy import text
 from tqdm import tqdm
 
-from api.historical_request import get_weather
+from api.api_requests import get_weather
 from shared.constants import BASE_HOURLY_PARAMS, GAME_LENGTH, PRE_GAME_WINDOW
 from shared.game_venue import Venue, Game, NoMatchingVenueError
 from sql import templates
