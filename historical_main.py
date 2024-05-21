@@ -1,17 +1,12 @@
 from typing import List
-
-from tqdm import tqdm
-
-from api.api_requests import get_weather
-from historical.historical_pipeline import enrich_venue_data, enrich_game_data, multithread_process_games, \
-    create_historical_table, insert_into_historical_table, enrich_game_weather
-from shared.constants import BASE_HOURLY_PARAMS, GAME_LENGTH, PRE_GAME_WINDOW
+from pipelines.historical_pipeline import enrich_venue_data, enrich_game_data, multithread_process_games, \
+    create_historical_table, insert_into_historical_table
 from shared.game_venue import Venue, Game
 from sql.sql_helpers import create_pg_engine
 
 
 def run_historical():
-    # create historical titans table
+    # create pipelines titans table
     engine = create_pg_engine()
     create_historical_table(engine)
 
@@ -28,7 +23,7 @@ def run_historical():
     game_data = multithread_process_games(game_data)
 
 
-    # insert game data into historical titans table
+    # insert game data into pipelines titans table
     # options here, insert one by one, or in bulk
     # I think bulk is better/quicker for this example but if we ever
     # want to log each game individually to see whether it fails to insert (and why)
