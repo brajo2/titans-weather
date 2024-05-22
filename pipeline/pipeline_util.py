@@ -101,6 +101,7 @@ def enrich_game_weather(game_data,
             game.narrow_weather_hour_window(start_hour=game.start_time.hour,
                                             game_length=GAME_LENGTH,
                                             pre_game_window=PRE_GAME_WINDOW)
+    return game_data
 
 
 def enrich_venue_data(file_path: str) -> List[Venue]:
@@ -218,9 +219,12 @@ def build_games_df(games,
 
             if is_forecast:
                 data.update({
-                    "is_played": game.is_played,
-                    "home_team_score_predicted": 'NULL',  # todo - add when functionality has been created
-                    "visit_team_score_predicted": game.visit_team_score_predicted,
+                    "is_played": False,
+                    # todo - add when functionality has been created
+                    "home_team_score_predicted": 'NULL',
+                    "visit_team_score_predicted": 'NULL',
+                    "home_team_win_probability_predicted": 'NULL',
+                    "visit_team_win_probability_predicted": 'NULL'
                 })
 
             all_data.append(data)
@@ -267,12 +271,12 @@ def insert_into_postgres_table(engine, games: List[Game], is_forecast: bool):
     :param games:
     :return:
     """
-    games_df = build_games_df(games)
+    games_df = build_games_df(games, is_forecast)
 
     params = {
         'schema': SCHEMA,
         'df': games_df,
-        'columns': HISTORICAL_TABLE_INSERT_COLS,
+        'columns': FORECAST_TABLE_INSERT_COLS,
         'is_forecast': is_forecast,
     }
     query_template = resources.read_text(templates, 'insert_into_postgres_table.j2.sql')
