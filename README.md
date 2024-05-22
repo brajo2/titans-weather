@@ -70,3 +70,14 @@
     - Game & Venue objects, core methods for identifying weather for a game
   - pipeline: the modularized pipeline for both forecast and historical data
   - final_dataset: the final datasets that are created from the pipeline
+  
+### Output files/queries for task:
+##### SQL queries:
+[5 Interesting Queries](sql/queries)
+
+##### 2021-2023 final datasets:
+[historical_games](final_dataset/historical_games_202405211916.xlsx)
+
+##### 2024 forecasted games (fake data):
+[forecasted games](final_dataset/forecast_games_202405211930.xlsx)
+
