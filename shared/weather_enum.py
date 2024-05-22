@@ -22,4 +22,4 @@ class Timezone(Enum):  # could be expanded for the api's options:
 
 class Forecast(Enum):
     ARCHIVE = "archive"
-    FORECAST = "forecast"
+    UPCOMING = "forecast"
