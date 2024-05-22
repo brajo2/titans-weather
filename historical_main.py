@@ -15,13 +15,8 @@ def run_historical():
     venue_data: List[Venue] = enrich_venue_data('csv/venues.csv')
     game_data: List[Game] = enrich_game_data('csv/games.csv', venue_data)
 
-    # get weather for each game
-    # one at a time, very slow (5+ minutes)
-    # game_data = enrich_game_weather(game_data,
-    #                weather_variables=[BASE_HOURLY_PARAMS + [HourlyWeatherParam.PRECIPITATION_PROBABILITY_FUTURE]],
-    #                weather_forecast_type=Forecast.ARCHIVE)
-
-    # but could be multithreaded for speed!!
+    # could get weather for each game, one at a time, but very slow (5+ minutes)
+    # but could be multithreaded to speed up
     # as there are 800+ calls to the API (takes 40 seconds instead)
     game_data = multithread_process_games(game_data, weather_forecast_type=Forecast.ARCHIVE)
 
@@ -30,7 +25,7 @@ def run_historical():
     # options here, insert one by one, or in bulk
     # I think bulk is better/quicker for this example but if we ever
     # want to log each game individually to see whether it fails to insert (and why)
-    # this game.insert_into_historical() would be a sensible code path
+    # this game.insert_into_postgres() would be a sensible code path
     insert_into_postgres_table(engine, game_data, is_forecast=False)
 
 if __name__ == '__main__':
