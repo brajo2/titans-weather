@@ -14,6 +14,7 @@
   - sqlalchemy: for creating the tables in the database
 #### Adjusted the venues.csv and games.csv column headers to be snakecase, because that can become an unnecessary headache. 
   - Looking back I could have written a helper function to do this.
+
 ~~#### Added a mechanism to find the geolocation of each city in the game site column of the games.csv (using geocoding API)~~
 #### Created map for outlier game site names like Tampa Bay and Las Vegas
   - I had another idea to use the geocoding API to find the latitude and longitude of the game site, but there weren't SO many outliers that it was necessary. And it would've required a good number of additional API calls that would've extended the length of the work. In addition, I would've had to use a methodology to find the closest stadium to the geocoded location, and use manhattan distance or haversine distance formula to find close stadiums for a problem that really only existed for a few stadiums.
