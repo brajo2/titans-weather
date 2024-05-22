@@ -1,25 +1,20 @@
 season,week,game_date,start_time,start_time_gmt_offset,game_site,home_team,home_team_final_score,visit_team,visit_team_final_score
-2024,5,5/22/2024,13:00,-5,New York,New York Giants,0,Dallas Cowboys,0
-2024,5,5/23/2024,16:00,-5,Chicago,Chicago Bears,0,Green Bay Packers,0
-2024,5,5/24/2024,13:00,-5,Detroit,Detroit Lions,0,Minnesota Vikings,0
-2024,5,5/25/2024,16:00,-5,Philadelphia,Philadelphia Eagles,0,New York Jets,0
-2024,5,5/26/2024,20:20,-5,San Francisco,San Francisco 49ers,0,Seattle Seahawks,0
-2024,5,5/27/2024,13:00,-5,Los Angeles,Los Angeles Rams,0,Arizona Cardinals,0
-2024,5,5/28/2024,16:00,-5,Dallas,Dallas Cowboys,0,Washington Commanders,0
-2024,5,5/29/2024,13:00,-5,Miami,Miami Dolphins,0,New England Patriots,0
-2024,5,5/30/2024,20:20,-5,New Orleans,New Orleans Saints,0,Atlanta Falcons,0
-2024,6,5/31/2024,13:00,-5,Buffalo,Buffalo Bills,0,Miami Dolphins,0
-2024,6,6/1/2024,16:00,-5,Green Bay,Green Bay Packers,0,Chicago Bears,0
-2024,6,6/2/2024,13:00,-5,Baltimore,Baltimore Ravens,0,Pittsburgh Steelers,0
-2024,6,6/3/2024,16:00,-5,Seattle,Seattle Seahawks,0,San Francisco 49ers,0
-2024,6,6/4/2024,20:20,-5,Denver,Denver Broncos,0,Kansas City Chiefs,0
-2024,6,6/5/2024,13:00,-5,Houston,Houston Texans,0,Indianapolis Colts,0
-2024,6,6/10/2024,13:00,-5,Baltimore,Baltimore Ravens,0,Pittsburgh Steelers,0
-2024,6,6/11/2024,16:00,-5,Seattle,Seattle Seahawks,0,San Francisco 49ers,0
-2024,6,6/12/2024,20:20,-5,Denver,Denver Broncos,0,Kansas City Chiefs,0
-2024,6,6/13/2024,13:00,-5,Houston,Houston Texans,0,Indianapolis Colts,0
-2024,6,6/14/2024,16:00,-5,Cleveland,Cleveland Browns,0,Cincinnati Bengals,0
-2024,6,6/15/2024,20:20,-5,Atlanta,Atlanta Falcons,0,Carolina Panthers,0
-2024,6,6/16/2024,13:00,-5,Tampa Bay,Tampa Bay Buccaneers,0,New Orleans Saints,0
-2024,6,6/17/2024,16:00,-5,Tennessee,Tennessee Titans,0,Jacksonville Jaguars,0
-2024,6,6/18/2024,13:00,-5,Indianapolis,Indianapolis Colts,0,Houston Texans,0
+2021,1,5/25/2024,20:20,-5,Tampa Bay,Tampa Bay Buccaneers,0,Dallas Cowboys,0
+2021,1,5/29/2024,13:00,-5,Atlanta,Atlanta Falcons,0,Philadelphia Eagles,0
+2021,1,5/29/2024,13:00,-5,Orchard Park,Buffalo Bills,0,Pittsburgh Steelers,0
+2021,1,5/29/2024,13:00,-5,Charlotte,Carolina Panthers,0,New York Jets,0
+2021,1,5/29/2024,13:00,-5,Cincinnati,Cincinnati Bengals,0,Minnesota Vikings,0
+2021,1,5/29/2024,13:00,-5,Detroit,Detroit Lions,0,San Francisco 49ers,0
+2021,1,5/29/2024,12:00,-6,Houston,Houston Texans,0,Jacksonville Jaguars,0
+2021,1,5/29/2024,13:00,-5,Indianapolis,Indianapolis Colts,0,Seattle Seahawks,0
+2021,1,5/29/2024,12:00,-6,Nashville,Tennessee Titans,0,Arizona Cardinals,0
+2021,1,5/29/2024,13:00,-5,Landover,Washington Football Team,0,Los Angeles Chargers,0
+2021,1,5/29/2024,15:25,-6,Kansas City,Kansas City Chiefs,0,Cleveland Browns,0
+2021,1,5/29/2024,16:25,-5,Foxborough,New England Patriots,0,Miami Dolphins,0
+2021,1,5/29/2024,16:25,-5,Jacksonville,New Orleans Saints,0,Green Bay Packers,0
+2021,1,5/29/2024,16:25,-5,East Rutherford,New York Giants,0,Denver Broncos,0
+2021,1,5/29/2024,17:20,-8,Inglewood,Los Angeles Rams,0,Chicago Bears,0
+2021,1,5/31/2024,17:15,-8,Las Vegas,Las Vegas Raiders,0,Baltimore Ravens,0
+2021,2,6/3/2024,13:00,-5,Pittsburgh,Pittsburgh Steelers,0,Las Vegas Raiders,0
+2021,2,6/1/2024,20:20,-5,Landover,Washington Football Team,0,New York Giants,0
+2021,2,6/3/2024,13:00,-5,Charlotte,Carolina Panthers,0,New Orleans Saints,0
