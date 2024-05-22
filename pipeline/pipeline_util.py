@@ -272,11 +272,11 @@ def insert_into_postgres_table(engine, games: List[Game], is_forecast: bool):
     :return:
     """
     games_df = build_games_df(games, is_forecast)
-
+    insert_columns = FORECAST_TABLE_INSERT_COLS if is_forecast else HISTORICAL_TABLE_INSERT_COLS
     params = {
         'schema': SCHEMA,
         'df': games_df,
-        'columns': FORECAST_TABLE_INSERT_COLS,
+        'columns': insert_columns,
         'is_forecast': is_forecast,
     }
     query_template = resources.read_text(templates, 'insert_into_postgres_table.j2.sql')
