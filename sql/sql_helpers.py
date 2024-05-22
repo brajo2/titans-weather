@@ -17,29 +17,7 @@ HOST = os.getenv("POSTGRES_HOST")
 PORT = os.getenv("POSTGRES_PORT")
 DB = os.getenv("POSTGRES_DB")
 
-RowDefinition = namedtuple('RowDefinition', ['name', 'type'])
-HISTORICAL_TABLE_INSERT_COLS = [
-    RowDefinition('season', 'INT'),
-    RowDefinition('week', 'INT'),
-    RowDefinition('game_date', 'DATE'),
-    RowDefinition('start_time', 'TIME'),
-    RowDefinition('start_time_gmt_offset', 'INT'),
-    RowDefinition('game_site', 'TEXT'),
-    RowDefinition('home_team', 'TEXT'),
-    RowDefinition('home_team_final_score', 'INT'),
-    RowDefinition('visit_team', 'TEXT'),
-    RowDefinition('visit_team_final_score', 'INT'),
-    RowDefinition('weather_hash', 'TEXT'),
-    RowDefinition('weather_data', 'JSONB'),
-    RowDefinition('weather_units', 'JSONB'),
-    RowDefinition('use_weather_variable', 'JSONB'),
-    RowDefinition('venue_id', 'INT'),
-    RowDefinition('venue_name', 'TEXT'),
-    RowDefinition('venue_geo_latitude', 'FLOAT'),
-    RowDefinition('venue_geo_longitude', 'FLOAT'),
-    RowDefinition('venue_surface', 'TEXT'),
-    RowDefinition('venue_roof_type', 'TEXT'),
-]
+RowDefinition = namedtuple('RowDefinition', ['name', 'type', 'null_default'])
 
 def create_pg_engine(env="main", timeout=50, pool_size=10, max_overflow=20, pool_recycle=3600):
     if env:
