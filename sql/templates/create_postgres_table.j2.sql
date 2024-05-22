@@ -1,4 +1,4 @@
-CREATE TABLE if not exists {{schema}}.historical_games (
+CREATE TABLE if not exists {{schema}}.{% if is_forecast %}forecast{% else %}historical{% endif %}_games (
     game_id SERIAL PRIMARY KEY,
     season INT,
     week INT,
@@ -20,4 +20,11 @@ CREATE TABLE if not exists {{schema}}.historical_games (
     venue_geo_longitude FLOAT,
     venue_surface text,
     venue_roof_type text
+    {% if is_forecast %}
+    , is_played BOOLEAN
+    , home_team_score_predicted FLOAT DEFAULT NULL
+    , visit_team_score_predicted FLOAT DEFAULT NULL
+    , home_team_win_probability_predicted FLOAT DEFAULT NULL
+    , visit_team_win_probability_predicted FLOAT DEFAULT NULL
+    {% endif %}
 );
