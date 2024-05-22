@@ -56,9 +56,9 @@
   - per venue, per venue per season, per season
   - rollup tables
 ##### future goals, cool stuff:
-projected scores based on weather situations
-rostered players & EPA/play based on weather situations
-team EPA/play vs weather situations
+- projected scores based on weather situations
+- rostered players & EPA/play based on weather situations
+- team EPA/play vs weather situations
 
 --------
 ### Directories
