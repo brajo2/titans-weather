@@ -63,6 +63,7 @@ team EPA/play vs weather situations
 ### Directories
   - api: interacts with the open meteo API
   - sql: contains the SQL code for creating the tables & the jinja templating (& also has a readme for data table design decisions)
+    - **also includes the 5 queries that I chose to investigate my datamart table**
   - csv: obtains the csvs from the API
   - shared: shared functions, helpers, constants, parameters
     - Game & Venue objects, core methods for identifying weather for a game
