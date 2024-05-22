@@ -35,7 +35,9 @@ def get_weather(latitude, longitude, start_date, end_date,
     :return: dict
     """
     variable_names_unpacked = [v.value.param_name for v in variables]
-    url = f"https://archive-api.open-meteo.com/v1/{forecast_type}?latitude={latitude}&longitude={longitude}&start_date={start_date}&end_date={end_date}&{window.value}={','.join(variable_names_unpacked)}&temperature_unit={temperature_unit.value}&wind_speed_unit={wind_speed_unit.value}&timezone={timezone.value}"
+
+    prefix = "archive-" if forecast_type == Forecast.ARCHIVE else ""
+    url = f"https://{prefix}api.open-meteo.com/v1/{forecast_type.value}?latitude={latitude}&longitude={longitude}&start_date={start_date}&end_date={end_date}&{window.value}={','.join(variable_names_unpacked)}&temperature_unit={temperature_unit.value}&wind_speed_unit={wind_speed_unit.value}&timezone={timezone.value}"
 
     # set headers, not implemented
     headers = {}
